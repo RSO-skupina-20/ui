@@ -1,0 +1,28 @@
+<div class="container border rounded shadow-sm p-3 mb-5 bg-body">
+  <div class="row align-items-center">
+    <!-- Form Section -->
+    <div class="col-lg-6 col-md-12 d-flex flex-column align-items-center">
+      <h1>Prijava</h1>
+      <form class="w-100">
+        <div class="form-floating mb-4">
+          <input type="email" id="email" class="form-control" placeholder="Email"/>
+          <label for="email">Email</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" id="geslo" class="form-control" placeholder="Geslo"/>
+          <label for="geslo">Geslo</label>
+        </div>
+        <button type="submit" class="btn btn-info btn-rounded btn-block mb-4" data-mdb-ripple-color="dark"
+                (mousedown)="preveriVnos()">Prijava
+        </button>
+        <button type="button" class="btn btn-danger btn-rounded btn-block mb-4" data-mdb-ripple-color="dark"
+                [routerLink]="['']">Nazaj
+        </button>
+      </form>
+    </div>
+    <!-- Image Section -->
+    <div class="col-lg-6 col-md-12 d-flex justify-content-center">
+      <img src="./assets/images/prijava.svg" alt="Prijava" class="img-fluid custom-img">
+    </div>
+  </div>
+</div>

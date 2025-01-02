@@ -8,12 +8,14 @@ import { RegistracijaComponent } from './komponente/registracija/registracija.co
 import {FormsModule} from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
+import { PrijavaComponent } from './komponente/prijava/prijava.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    RegistracijaComponent
+    RegistracijaComponent,
+    PrijavaComponent
   ],
   imports: [
     BrowserModule,
