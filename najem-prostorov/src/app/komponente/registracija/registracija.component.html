@@ -1,0 +1,54 @@
+<div class="container border rounded shadow-sm p-3 mb-5 bg-body">
+  <div class="row">
+    <div class="col-lg-5">
+      <h1>Obrazec za registracijo</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form col-lg-5 col-md-12 col-12">
+      <form>
+        <div class="form-floating mb-4">
+          <input type="text" id="ime" class="form-control" placeholder="Ime"/>
+          <label for="ime">Ime</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="text" id="priimek" class="form-control" placeholder="Priimek"/>
+          <label for="priimek">Priimek</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="email" id="email" class="form-control" placeholder="Email"/>
+          <label for="email">Email naslov</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="text" id="telefon" class="form-control" placeholder="Telefon"/>
+          <label for="telefon">Telefon</label>
+        </div>
+        <div class="form-outline mb-4">
+          <label class="form-label" for="tip_uporabnika">Tip uporabnika</label>
+          <select id="tip_uporabnika" class="form-select custom-dropdown">
+            <option value="LASTNIK">Lastnik</option>
+            <option value="UPORABNIK">Uporabnik</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" id="geslo" class="form-control" placeholder="Geslo"/>
+          <label for="geslo">Geslo</label>
+        </div>
+        <div class="form-floating mb-4">
+          <input type="password" id="geslo2" class="form-control" placeholder="Ponovi geslo"/>
+          <label for="geslo2">Ponovi geslo</label>
+        </div>
+        <button type="submit" class="btn btn-info btn-rounded btn-block mb-4" data-mdb-ripple-color="dark"
+                (click)="potrdiRegistracijo()">Potrdi registracijo
+        </button>
+        <button type="button" class="btn btn-danger btn-rounded btn-block mb-4" data-mdb-ripple-color="dark"
+                [routerLink]="['']">Nazaj
+        </button>
+      </form>
+    </div>
+    <div class="col-lg-7 col-md-12 col-12">
+      <img src="./assets/images/registracija.svg" alt="Registracija" class="img-fluid mb-4">
+    </div>
+  </div>
+</div>
