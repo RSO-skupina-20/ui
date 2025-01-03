@@ -17,6 +17,7 @@ export class NajemProstorovService {
   public registrirajUporabnika(uporabnik: Uporabnik): Observable<any> {
     const url: string = `${this.uporabnikiUrl}/registracija`;
     const headers = {'content-type': 'application/json'};
+    console.log(uporabnik);
     return this.http
       .post(url, {
         ime: uporabnik.ime,

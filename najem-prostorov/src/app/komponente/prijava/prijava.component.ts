@@ -42,18 +42,32 @@ export class PrijavaComponent {
 
   public async prijava(email: string, geslo: string) {
     try {
-      await lastValueFrom(this.avtentikacijaService.prijava(email, geslo));
+      const odgovor = await lastValueFrom(this.avtentikacijaService.prijava(email, geslo));
+      if (odgovor?.napaka) {
+        alert(odgovor.napaka);  // Prikaz napake, ki jo vrne backend
+      } else if (odgovor?.jwt) {
+        console.log("Prijava uspešna. Žeton:", odgovor.jwt);
+        this.avtentikacijaService.shraniZeton(odgovor.jwt);
+      }
     } catch (napaka) {
       if (napaka instanceof HttpErrorResponse) {
-        alert(napaka.message);
+        alert(`Napaka: ${napaka.error?.napaka || napaka.message}`);
+      } else {
+        alert("Prišlo je do napake. Poskusite znova.");
       }
     }
   }
 
+
   private async pridobiUporabnika(): Promise<any> {
     let zeton = this.avtentikacijaService.pridobiZeton();
     if (zeton) {
-      this.uporabnik = jwtDecode(zeton);
+      try {
+        this.uporabnik = jwtDecode(zeton);
+      } catch (error) {
+        console.error("Invalid token specified:", error);
+        alert("Neveljaven žeton!");
+      }
     }
   }
 }
