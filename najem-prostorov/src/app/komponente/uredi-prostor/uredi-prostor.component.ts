@@ -116,4 +116,12 @@ export class UrediProstorComponent implements OnInit {
       }
     );
   }
+
+  // Izracunaj ceno dogodka
+  public izracunajCenoDogodka(dogodek: any): number {
+    const start = new Date(dogodek.zacetek.replace("[UTC]", ""));
+    const end = new Date(dogodek.konec.replace("[UTC]", ""));
+    const hours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+    return hours * parseFloat(this.prostor.cena);
+  }
 }
