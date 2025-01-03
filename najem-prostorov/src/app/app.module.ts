@@ -11,6 +11,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { PrijavaComponent } from './komponente/prijava/prijava.component';
 import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregled-prostorov.component';
 import { DodajProstorComponent } from './komponente/dodaj-prostor/dodaj-prostor.component';
+import { UrediProstorComponent } from './komponente/uredi-prostor/uredi-prostor.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DodajProstorComponent } from './komponente/dodaj-prostor/dodaj-prostor.
     RegistracijaComponent,
     PrijavaComponent,
     PregledProstorovComponent,
-    DodajProstorComponent
+    DodajProstorComponent,
+    UrediProstorComponent
   ],
   imports: [
     BrowserModule,

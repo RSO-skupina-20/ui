@@ -73,4 +73,27 @@ export class NajemProstorovService {
       }, {headers});
 
   }
+
+  public pridobiProstor(id: number): Observable<any> {
+    const url: string = `http://localhost:8080/v1/prostori/${id}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http
+      .get(url, {headers});
+  }
+
+  public posodobiProstor(prostor: any): Observable<any> {
+    const url: string = `http://localhost:8080/v1/prostori/${prostor.id}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http
+      .put(url, {
+        ime: prostor.ime,
+        opis: prostor.opis,
+        lokacija: prostor.lokacija,
+        cena: prostor.cena,
+        velikost: prostor.velikost
+      }, {headers});
+
+  }
 }
