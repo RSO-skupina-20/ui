@@ -1,0 +1,43 @@
+<div class="container border rounded shadow-sm p-4 mb-5 bg-light">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center">Dodaj nov prostor</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form col-12">
+      <form>
+        <div class="form-floating mb-4">
+          <input type="text" id="ime" class="form-control" placeholder="Ime prostora"/>
+          <label for="ime">Ime prostora</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="number" id="cena" class="form-control" placeholder="Cena prostora" min="0"/>
+          <label for="cena">Cena (€)</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="text" id="lokacija" class="form-control" placeholder="Lokacija prostora" />
+          <label for="lokacija">Lokacija</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <textarea id="opis" class="form-control" placeholder="Opis prostora" style="height: 150px;"></textarea>
+          <label for="opis">Opis prostora</label>
+        </div>
+
+        <div class="form-floating mb-4">
+          <input type="number" id="velikost" class="form-control" placeholder="Velikost prostora (m²)" min="0"/>
+          <label for="velikost">Velikost (m²)</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-color="dark"
+                (click)="dodajProstor()">Dodaj prostor</button>
+
+        <button type="button" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-color="dark"
+                [routerLink]="['/prostori']">Nazaj</button>
+      </form>
+    </div>
+  </div>
+</div>

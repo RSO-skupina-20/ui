@@ -10,6 +10,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { PrijavaComponent } from './komponente/prijava/prijava.component';
 import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregled-prostorov.component';
+import { DodajProstorComponent } from './komponente/dodaj-prostor/dodaj-prostor.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregle
     HomeComponent,
     RegistracijaComponent,
     PrijavaComponent,
-    PregledProstorovComponent
+    PregledProstorovComponent,
+    DodajProstorComponent
   ],
   imports: [
     BrowserModule,

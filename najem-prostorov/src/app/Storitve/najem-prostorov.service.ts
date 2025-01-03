@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BROWSER_STORAGE} from '../Razredi/shramba';
 import {Uporabnik} from '../Razredi/Uporabnik';
 import {Observable} from 'rxjs';
+import {Prostor} from '../Razredi/Prostor';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,28 @@ export class NajemProstorovService {
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
       .get(url, {headers});
+  }
+
+  public pridobiProstoreLastnika(idLastnika: number): Observable<any> {
+    const url: string = `http://localhost:8080/v1/prostori/lastnik/${idLastnika}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http
+      .get(url, {headers});
+  }
+
+  public dodajProstor(prostor: Prostor) {
+    const url: string = 'http://localhost:8080/v1/prostori';
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http
+      .post(url, {
+        ime: prostor.ime,
+        opis: prostor.opis,
+        lokacija: prostor.lokacija,
+        cena: prostor.cena,
+        velikost: prostor.velikost
+      }, {headers});
+
   }
 }
