@@ -96,4 +96,11 @@ export class NajemProstorovService {
       }, {headers});
 
   }
+
+  pridobiDogodkeProstora(prostorId: any) {
+    const url: string = `http://localhost:8082/v1/dogodki/prostor/${prostorId}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.get(url, {headers});
+  }
 }

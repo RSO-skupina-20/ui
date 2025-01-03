@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-floating mb-4">
-          <input type="text" id="lokacija" class="form-control" placeholder="Lokacija prostora" />
+          <input type="text" id="lokacija" class="form-control" placeholder="Lokacija prostora"/>
           <label for="lokacija">Lokacija</label>
         </div>
 
@@ -33,11 +33,56 @@
         </div>
 
         <button type="submit" class="btn btn-primary btn-block mb-4" data-mdb-ripple-color="dark"
-                (click)="posodobiProstor()">Posodobi</button>
+                (click)="posodobiProstor()">Posodobi
+        </button>
 
         <button type="button" class="btn btn-outline-secondary btn-block mb-4" data-mdb-ripple-color="dark"
-                [routerLink]="['/prostori']">Nazaj</button>
+                [routerLink]="['/prostori']">Nazaj
+        </button>
       </form>
     </div>
   </div>
 </div>
+
+<div class="container dogodki">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center mb-4">Seznam Dogodkov</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover shadow-lg bg-light">
+          <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Naziv</th>
+            <th>Začetek</th>
+            <th>Konec</th>
+            <th>Opis</th>
+            <th>Cena (€)</th>
+            <th>Id organizatorja</th>
+            <th>Št. gostov</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let dogodek of dogodki; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ dogodek.naziv }}</td>
+            <td>{{ dogodek.zacetek }}</td>
+            <td>{{ dogodek.konec }}</td>
+            <td>{{ dogodek.opis }}</td>
+            <td>{{ dogodek.cena }}</td>
+            <td>{{ dogodek.id_uporabnik }}</td>
+            <td>
+              {{ dogodek.povabljeni.length }}
+            </td>
+          </tr>
+          <!-- Prikaz ob praznem seznamu -->
+          <tr *ngIf="dogodki.length === 0">
+            <td colspan="9" class="text-center text-muted">Trenutno ni dogodkov.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
