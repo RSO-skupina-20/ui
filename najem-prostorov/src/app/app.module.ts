@@ -9,13 +9,15 @@ import {FormsModule} from '@angular/forms';
 
 import {HttpClientModule} from '@angular/common/http';
 import { PrijavaComponent } from './komponente/prijava/prijava.component';
+import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregled-prostorov.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegistracijaComponent,
-    PrijavaComponent
+    PrijavaComponent,
+    PregledProstorovComponent
   ],
   imports: [
     BrowserModule,

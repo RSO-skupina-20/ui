@@ -1,0 +1,94 @@
+.container {
+  text-align: center;
+  justify-content: center;
+}
+
+.prostor {
+  margin-top: 20px;
+  height: 400px;
+  position: relative;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 15px; /* Za bolj zaobljene robove */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.prostor:hover {
+  transform: translateY(-10px); /* Povečanje pri hoverju */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Dodajanje večje sence pri hoverju */
+}
+
+.prostor-info {
+  text-align: left;
+}
+
+.prostor-ime {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.prostor-lokacija {
+  font-size: 1rem;
+  color: #555;
+  text-align: center;
+}
+
+.prostor-opis {
+  font-size: 0.95rem;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.prostor-info p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.prostor-info a {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: calc(100% - 20px);
+  font-weight: bold;
+  text-align: center;
+}
+
+.prostor-info a:hover {
+  background-color: #0069d9;
+  color: #fff;
+}
+
+h4 {
+  text-align: center;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.podrobnosti {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+  border-color: #117a8b;
+}
+
+/* Odstranitev iskalnega polja */
+.SearchBox {
+  display: none;
+}

@@ -5,6 +5,7 @@ import {NajemProstorovService} from '../../Storitve/najem-prostorov.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Uporabnik} from '../../Razredi/Uporabnik';
 import {jwtDecode} from 'jwt-decode'
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-prijava',
@@ -16,7 +17,7 @@ import {jwtDecode} from 'jwt-decode'
 export class PrijavaComponent {
   public uporabnik: any;
 
-  constructor(private avtentikacijaService: AvtentikacijaService, private najemProstorovService: NajemProstorovService) {
+  constructor(private avtentikacijaService: AvtentikacijaService, private najemProstorovService: NajemProstorovService, private router: Router) {
   }
 
   public async preveriVnos() {
@@ -48,6 +49,9 @@ export class PrijavaComponent {
       } else if (odgovor?.jwt) {
         console.log("Prijava uspešna. Žeton:", odgovor.jwt);
         this.avtentikacijaService.shraniZeton(odgovor.jwt);
+        //naviagte to home page
+        this.router.navigate(['prostori']);
+
       }
     } catch (napaka) {
       if (napaka instanceof HttpErrorResponse) {

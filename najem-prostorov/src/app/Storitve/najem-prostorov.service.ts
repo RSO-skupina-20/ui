@@ -41,4 +41,12 @@ export class NajemProstorovService {
     httpOptions.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
     return this.http.post(url, {email, geslo}, httpOptions);
   }
+
+  public pridobiProstore(): Observable<any> {
+    const url: string = 'http://localhost:8080/v1/prostori';
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http
+      .get(url, {headers});
+  }
 }
