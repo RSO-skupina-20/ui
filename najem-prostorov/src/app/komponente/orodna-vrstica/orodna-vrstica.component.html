@@ -1,0 +1,97 @@
+<!--Orodna vrstica - Homepage -->
+<div *ngIf="showFlag === 'osnovna'">
+  <header class="orodnaVrstica">
+    <div class="logo">
+      <h4>Najem prostorov</h4>
+    </div>
+    <input type="checkbox" hidden>
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['/prijava']">Prijava</a>
+        </li>
+        <li>
+          <a [routerLink]="['registracija']">Registracija</a>
+        </li>
+      </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+  </header>
+</div>
+
+<div *ngIf="showFlag === 'prijava' || showFlag === 'registracija'">
+  <header class="orodnaVrstica">
+    <div class="logo">
+      <h4 [routerLink]="['']">Najem prostorov</h4>
+    </div>
+    <input type="checkbox" hidden>
+    <nav>
+      <ul>
+        <li>
+          <a href=""><i class="fa-solid fa-house fa-lg"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+  </header>
+</div>
+
+<div *ngIf="showFlag === 'lastnik'">
+  <header class="orodnaVrstica">
+    <div class="logo">
+      <h4>Najem prostorov</h4>
+    </div>
+    <input type="checkbox" id="nav_check" hidden>
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['/prostori']">Prostori</a>
+        </li>
+        <li>
+          <a [routerLink]="['/prostori/dodaj']">Dodajanje</a>
+        </li>
+        <li>
+          <a [routerLink]="['']" (click)="odjava()">Odjava</a>
+        </li>
+      </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+  </header>
+</div>
+
+<div *ngIf="showFlag === 'uporabnik'">
+  <header class="orodnaVrstica">
+    <div class="logo">
+      <h4>Najem prostorov</h4>
+    </div>
+    <input type="checkbox" hidden>
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['/dogodki']">Dogodki</a>
+        </li>
+        <li>
+          <a [routerLink]="['']" (click)="odjava()">Odjava</a>
+        </li>
+      </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </label>
+  </header>
+</div>
+

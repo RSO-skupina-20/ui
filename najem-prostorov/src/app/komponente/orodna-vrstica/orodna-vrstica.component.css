@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+
+header {
+  background: #efefef;
+  padding: 0;
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+}
+
+.orodnaVrstica {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+}
+
+a.logo {
+  font-weight: bold;
+  padding: 1em;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 1em;
+}
+
+nav ul li a {
+  padding: 10px;
+  display: inline-block;
+}
+
+.btns {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 10px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.slider {
+  max-height: 60vh;
+}
+
+.napis {
+  position: absolute;
+  right: 15%;
+  bottom: 1.25rem;
+  left: 15%;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  color: #fff;
+  text-align: center;
+}
+
+.podnaslov {
+  font-size: 1.2vw;
+  color: #d3d3d3;
+}
+
+.vrsta {
+  margin-top: 50px;
+}
+
+.opis {
+  display: inline-block;
+  width: 50%;
+  vertical-align: top;
+  color: #a9a9a9
+}
+
+nav a {
+  margin-right: 40px;
+}
+
+header {
+  width: 100%;
+  height: 70px;
+  background-color: #fefefe;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto;
+}
+
+a {
+  list-style: none;
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+
+.logo {
+  width: 120px;
+  margin-top: 8px;
+}
+
+nav .logo {
+  display: none;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav ul li a {
+  color: #212526;
+  display: block;
+  font-weight: 600;
+  padding: 8px 18px;
+  transition: 0.2s;
+  border-radius: 30px;
+}
+
+nav ul li a:hover {
+  background-color: #f6f4ff;
+}
+
+
+.hamburger {
+  display: none;
+  height: fit-content;
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.hamburger:hover {
+  background-color: #f6f4ff;
+}
+
+.hamburger div {
+  width: 30px;
+  height: 2px;
+  margin: 6px 0;
+  background-color: #212526;
+}
+
+#nav_check:checked~nav {
+  left: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+  header {
+    padding: 0 20px;
+  }
+
+  nav {
+    position: absolute;
+    left: -300px;
+    top: 0;
+    z-index: 999;
+    width: 280px;
+    height: 100vh;
+    background-color: #fefefe;
+    transition: 0.2s;
+    box-shadow: 2px 0 20px 0 rgba(0, 0, 0, 0.05)
+  }
+
+  nav .logo {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+
+  nav ul li a {
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    border-radius: 5px;
+
+  }
+
+  nav ul {
+    display: block;
+    padding: 0 20px;
+    margin-top: 30px;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

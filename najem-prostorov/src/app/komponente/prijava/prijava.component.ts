@@ -38,7 +38,8 @@ export class PrijavaComponent {
 
     await this.prijava(email, geslo);
     await this.pridobiUporabnika();
-    if (this.uporabnik.role === 'uporabnik') {
+    console.log(this.uporabnik);
+    if (this.uporabnik.tipUporabnika.toLowerCase() === 'uporabnik') {
       await this.router.navigate(['/dogodki']);
     }
     else {

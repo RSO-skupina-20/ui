@@ -13,6 +13,7 @@ import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregle
 import { DodajProstorComponent } from './komponente/dodaj-prostor/dodaj-prostor.component';
 import { UrediProstorComponent } from './komponente/uredi-prostor/uredi-prostor.component';
 import { PregledDogodkovComponent } from './komponente/pregled-dogodkov/pregled-dogodkov.component';
+import { OrodnaVrsticaComponent } from './komponente/orodna-vrstica/orodna-vrstica.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { PregledDogodkovComponent } from './komponente/pregled-dogodkov/pregled-
     PregledProstorovComponent,
     DodajProstorComponent,
     UrediProstorComponent,
-    PregledDogodkovComponent
+    PregledDogodkovComponent,
+    OrodnaVrsticaComponent
   ],
   imports: [
     BrowserModule,
