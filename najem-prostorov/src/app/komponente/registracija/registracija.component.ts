@@ -52,7 +52,7 @@ export class RegistracijaComponent {
       (uporabnik) => {
         console.log("Uporabnik uspešno registriran: ", uporabnik);
         alert("Registracija uspešna!");
-        this.router.navigate(['']);
+        this.router.navigate(['/prijava']);
       },
       (napaka) => {
         console.error("Prišlo je do napake pri registraciji uporabnika: ", napaka);

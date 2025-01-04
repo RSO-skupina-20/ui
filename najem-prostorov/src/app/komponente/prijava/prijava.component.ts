@@ -38,20 +38,22 @@ export class PrijavaComponent {
 
     await this.prijava(email, geslo);
     await this.pridobiUporabnika();
-    console.log(this.uporabnik);
+    if (this.uporabnik.role === 'uporabnik') {
+      await this.router.navigate(['/dogodki']);
+    }
+    else {
+      await this.router.navigate(['/prostori']);
+    }
   }
 
   public async prijava(email: string, geslo: string) {
     try {
       const odgovor = await lastValueFrom(this.avtentikacijaService.prijava(email, geslo));
       if (odgovor?.napaka) {
-        alert(odgovor.napaka);  // Prikaz napake, ki jo vrne backend
+        alert(odgovor.napaka);
       } else if (odgovor?.jwt) {
         console.log("Prijava uspešna. Žeton:", odgovor.jwt);
         this.avtentikacijaService.shraniZeton(odgovor.jwt);
-        //naviagte to home page
-        this.router.navigate(['prostori']);
-
       }
     } catch (napaka) {
       if (napaka instanceof HttpErrorResponse) {

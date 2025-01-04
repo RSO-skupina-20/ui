@@ -1,0 +1,249 @@
+<div class="container dogodki">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-center mb-4">Seznam Dogodkov</h2>
+      <div class="table">
+        <table class="table table-bordered table-hover shadow-lg bg-light">
+          <thead>
+          <tr class="table-success">
+            <th>Naziv</th>
+            <th>Začetek</th>
+            <th>Konec</th>
+            <th>Št. gostov</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr
+            *ngFor="let dogodek of dogodki; let i = index"
+            (click)="onDogodekClick(dogodek.id_dogodek, i)"
+            class="table-row-click"
+          >
+            <td>{{ dogodek.naziv }}</td>
+            <td>{{ dogodek.zacetek }}</td>
+            <td>{{ dogodek.konec }}</td>
+            <td>
+              {{ dogodek.povabljeni.length }}
+            </td>
+          </tr>
+          <tr *ngIf="dogodki.length === 0">
+            <td colspan="9" class="text-center text-muted">Trenutno ni dogodkov.</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <!-- Podrobnosti dogodka -->
+        <div *ngIf="showPodrobnosti">
+          <div class="event-container">
+            <div class="row">
+              <div class="col-6">
+                <h2 class="text-center mb-4">Podrobnosti dogodka</h2>
+              </div>
+              <div class="col-6">
+                <h2 class="text-center mb-4">Povabljeni</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form col-6">
+                <form>
+                  <!-- Naziv -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="text"
+                      id="naziv"
+                      class="form-control"
+                      placeholder="Naziv"
+                      [readonly]="!isEditing"
+                      [(ngModel)]="naziv"
+                      name="naziv"
+                    />
+                    <label for="naziv">Naziv</label>
+                  </div>
+
+                  <!-- Začetek -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="text"
+                      id="zacetek"
+                      class="form-control"
+                      placeholder="Začetek"
+                      [readonly]="!isEditing"
+                      [(ngModel)]="zacetek"
+                      name="zacetek"
+                    />
+                    <label for="zacetek">Začetek</label>
+                  </div>
+
+                  <!-- Konec -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="text"
+                      id="konec"
+                      class="form-control"
+                      placeholder="Konec"
+                      [readonly]="!isEditing"
+                      [(ngModel)]="konec"
+                      name="konec"
+                    />
+                    <label for="konec">Konec</label>
+                  </div>
+
+                  <!-- Opis -->
+                  <div class="form-floating mb-4">
+                    <textarea
+                      id="opis"
+                      class="form-control"
+                      placeholder="Opis"
+                      style="height: 100px"
+                      [readonly]="!isEditing"
+                      [(ngModel)]="opis"
+                      name="opis"
+                    ></textarea>
+                    <label for="opis">Opis</label>
+                  </div>
+
+                  <!-- Cena -->
+                  <div class="form-floating mb-4">
+                    <input
+                      type="number"
+                      id="cena"
+                      class="form-control"
+                      placeholder="Cena"
+                      [readonly]="!isEditing"
+                      [(ngModel)]="cena"
+                      name="cena"
+                    />
+                    <label for="cena">Cena (€)</label>
+                  </div>
+
+                  <!-- Št. gostov -->
+                  <div class="d-flex align-items-center mb-4">
+                    <div class="flex-grow-1">
+                      <p class="fw-bold">Št. gostov: {{ izbranDogodek.povabljeni.length }}</p>
+                    </div>
+                  </div>
+
+                  <!-- Gumbi -->
+                  <div class="d-flex justify-content-between">
+                    <button
+                      type="button"
+                      class="btn btn-danger"
+                      *ngIf="!isEditing"
+                      (click)="omogociUrejanje()"
+                    >
+                      Uredi
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      *ngIf="!isEditing"
+                      (click)="prikaziDodajGosta()"
+                    >
+                      Dodaj gosta
+                    </button>
+                    <div *ngIf="isEditing">
+                      <button
+                        type="button"
+                        class="btn btn-success me-2"
+                        (click)="shraniSpremembe()"
+                      >
+                        Shrani
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        (click)="prekliciUrejanje()"
+                      >
+                        Nazaj
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="form col-6">
+                <table class="table">
+                  <thead>
+                  <tr class="table-info">
+                    <th scope="col">Ime</th>
+                    <th scope="col">Priimek</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let povabljeni of izbranDogodek.povabljeni">
+                    <td>{{ povabljeni.ime }}</td>
+                    <td>{{ povabljeni.priimek }}</td>
+                    <td>{{ povabljeni.email }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Dodaj Gosta -->
+          <div class="row mt-4" *ngIf="dodajGostaVisible">
+            <div class="form col-12">
+              <h3 class="text-center mb-3">Dodaj Gosta</h3>
+              <form>
+                <!-- Ime -->
+                <div class="form-floating mb-4">
+                  <input
+                    type="text"
+                    id="imeGost"
+                    class="form-control"
+                    placeholder="Ime"
+                    [(ngModel)]="novGost.ime"
+                    name="imeGost"
+                  />
+                  <label for="imeGost">Ime</label>
+                </div>
+
+                <!-- Priimek -->
+                <div class="form-floating mb-4">
+                  <input
+                    type="text"
+                    id="priimekGost"
+                    class="form-control"
+                    placeholder="Priimek"
+                    [(ngModel)]="novGost.priimek"
+                    name="priimekGost"
+                  />
+                  <label for="priimekGost">Priimek</label>
+                </div>
+
+                <!-- Email -->
+                <div class="form-floating mb-4">
+                  <input
+                    type="email"
+                    id="emailGost"
+                    class="form-control"
+                    placeholder="Email"
+                    [(ngModel)]="novGost.email"
+                    name="emailGost"
+                  />
+                  <label for="emailGost">Email</label>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                  <button
+                    type="button"
+                    class="btn btn-primary me-2"
+                    (click)="shraniGosta()"
+                  >
+                    Shrani Gosta
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="prekliciDodajanje()"
+                  >
+                    Prekliči
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

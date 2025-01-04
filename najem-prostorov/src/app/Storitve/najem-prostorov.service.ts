@@ -97,10 +97,52 @@ export class NajemProstorovService {
 
   }
 
-  pridobiDogodkeProstora(prostorId: any) {
+  public pridobiDogodkeProstora(prostorId: any) {
     const url: string = `http://localhost:8082/v1/dogodki/prostor/${prostorId}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.get(url, {headers});
+  }
+
+  public pridobiDogodke(id: any) {
+    const url: string = `http://localhost:8082/v1/dogodki/uporabnik/${id}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.get(url, {headers});
+
+  }
+
+  public pridobiVseDogodke() {
+    const url: string = `http://localhost:8082/v1/dogodki`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.get(url, {headers});
+  }
+
+  public posodobiDogodek(id: string, naziv: string, zacetek: string, konec: string, opis: string, cena: string) {
+    const url: string = `http://localhost:8082/v1/dogodki/${id}`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.put(url, {
+      naziv: naziv,
+      zacetek: zacetek,
+      konec: konec,
+      opis: opis,
+      cena: cena
+    }, {headers});
+  }
+
+  public dodajGosta(id_dogodek: number, ime: string, priimek: string, email: string) {
+    const url: string = `http://localhost:8082/v1/povabljeni`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.post(url, {
+      ime: ime,
+      priimek: priimek,
+      email: email,
+      id_dogodek: id_dogodek,
+      sprejeto: false
+    }, {headers});
+
   }
 }

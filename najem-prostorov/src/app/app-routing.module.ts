@@ -6,6 +6,7 @@ import {PrijavaComponent} from './komponente/prijava/prijava.component';
 import {PregledProstorovComponent} from './komponente/pregled-prostorov/pregled-prostorov.component';
 import {DodajProstorComponent} from './komponente/dodaj-prostor/dodaj-prostor.component';
 import {UrediProstorComponent} from './komponente/uredi-prostor/uredi-prostor.component';
+import {PregledDogodkovComponent} from './komponente/pregled-dogodkov/pregled-dogodkov.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: 'prijava', component: PrijavaComponent},
   {path: 'prostori', component: PregledProstorovComponent},
   {path: 'prostori/dodaj', component: DodajProstorComponent},
-  {path: 'prostori/uredi/:id', component: UrediProstorComponent}
+  {path: 'prostori/uredi/:id', component: UrediProstorComponent},
+  {path: 'dogodki', component: PregledDogodkovComponent}
 ];
 
 @NgModule({

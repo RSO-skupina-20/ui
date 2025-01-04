@@ -1,0 +1,25 @@
+.event-container {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  margin: 16px auto;
+}
+
+.event-container h2 {
+  font-family: "San Francisco", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+}
+
+.event-container form, .event-container table {
+  margin-top: 16px;
+}
+
+.event-container table {
+  background-color: #ffffff;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}

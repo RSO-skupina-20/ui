@@ -12,6 +12,7 @@ import { PrijavaComponent } from './komponente/prijava/prijava.component';
 import { PregledProstorovComponent } from './komponente/pregled-prostorov/pregled-prostorov.component';
 import { DodajProstorComponent } from './komponente/dodaj-prostor/dodaj-prostor.component';
 import { UrediProstorComponent } from './komponente/uredi-prostor/uredi-prostor.component';
+import { PregledDogodkovComponent } from './komponente/pregled-dogodkov/pregled-dogodkov.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UrediProstorComponent } from './komponente/uredi-prostor/uredi-prostor.
     PrijavaComponent,
     PregledProstorovComponent,
     DodajProstorComponent,
-    UrediProstorComponent
+    UrediProstorComponent,
+    PregledDogodkovComponent
   ],
   imports: [
     BrowserModule,
