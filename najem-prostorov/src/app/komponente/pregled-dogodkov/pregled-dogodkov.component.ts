@@ -15,12 +15,21 @@ import {lastValueFrom} from 'rxjs';
 export class PregledDogodkovComponent implements OnInit {
   public uporabnik: any;
   public dogodki: any;
-  public dogodek: any;
+  public prostor: any;
   public naziv: any;
   public zacetek: any;
   public konec: any;
   public opis: any;
   public cena: any;
+  public prostori: any;
+  public novDogodek = {
+    naziv: '',
+    zacetek: '',
+    konec: '',
+    opis: '',
+    cena: '',
+    id_prostor: ''
+  };
 
   public showPodrobnosti: boolean = false;
   public dodajGostaVisible: boolean = false;
@@ -44,6 +53,7 @@ export class PregledDogodkovComponent implements OnInit {
   // Pridobi dogodke uporabnika
   izbranDogodek: any;
   isEditing: boolean = false;
+  showDodajDogodek: boolean = false;
 
   private async pridobiDogodke(): Promise<void> {
     if (this.uporabnik.role === 'uporabnik') {
@@ -71,31 +81,52 @@ export class PregledDogodkovComponent implements OnInit {
     }
   }
 
+  private async pridobiVseProstore() {
+    this.najemProstorovService.pridobiProstore().subscribe(
+      (prostori) => {
+        this.prostori = Array.isArray(prostori) ? prostori : [];
+        console.log("Prostori: ", this.prostori);
+      },
+      (error) => {
+        console.error("Napaka pri pridobivanju prostorov: ", error);
+        alert("Napaka pri pridobivanju prostorov");
+      }
+    );
+  }
+
   async ngOnInit(): Promise<void> {
     await this.pridobiUporabnika();
     await this.pridobiDogodke();
 
   }
 
-  onDogodekClick(id_dogodek: any, index: any) {
+  public onDogodekClick(id_dogodek: any, index: any) {
     this.showPodrobnosti = true;
     this.izbranDogodek = this.dogodki[index];
-    this.naziv = this.izbranDogodek.naziv;
-    this.zacetek = this.izbranDogodek.zacetek;
-    this.konec = this.izbranDogodek.konec;
-    this.opis = this.izbranDogodek.opis;
-    this.cena = this.izbranDogodek.cena;
-
-    console.log("Izbran dogodek: ", this.izbranDogodek);
-
+    // Pridobi podrobnosti prostora
+    this.najemProstorovService.pridobiProstor(this.izbranDogodek.id_prostor).subscribe(
+      (prostor) => {
+        this.prostor = prostor;
+        this.prostor.celotniNaziv = this.prostor.ime + " - " + this.prostor.lokacija;
+        this.naziv = this.izbranDogodek.naziv;
+        this.zacetek = this.izbranDogodek.zacetek;
+        this.konec = this.izbranDogodek.konec;
+        this.opis = this.izbranDogodek.opis;
+        this.cena = this.izbranDogodek.cena;
+        console.log("Izbran dogodek: ", this.izbranDogodek);
+        console.log("Prostor: ", this.prostor);
+      },
+      (error) => {
+        console.error("Napaka pri pridobivanju prostora: ", error);
+        alert("Napaka pri pridobivanju prostora");
+      }
+    );
   }
 
-  odpriSeznamGostov() {
-
-  }
-
-  omogociUrejanje() {
+  public async omogociUrejanje() {
+    await this.pridobiVseProstore();
     this.isEditing = true;
+    console.log(this.prostori);
 
   }
 
@@ -193,5 +224,65 @@ export class PregledDogodkovComponent implements OnInit {
 
   prikaziDodajGosta() {
     this.dodajGostaVisible = true;
+  }
+
+  dodajDogodek() {
+    this.pridobiVseProstore()
+    this.showDodajDogodek = true;
+
+  }
+
+  shraniDogodek() {
+    // Preveri ce so vsa polja izpolnjena
+    if (this.novDogodek.naziv === "" || this.novDogodek.zacetek === ""
+      || this.novDogodek.konec === "" || this.novDogodek.opis === "" || this.novDogodek.cena === ""
+      || this.novDogodek.id_prostor === "") {
+      alert("Izpolnite vsa polja!");
+      return;
+    }
+
+    // Preveri ce je zacetek pred koncem
+    if (this.novDogodek.zacetek >= this.novDogodek.konec) {
+      alert("Začetek mora biti pred koncem!");
+      return;
+    }
+
+    // Dodaj dogodek
+    let data = {
+      naziv: this.novDogodek.naziv,
+      zacetek: this.novDogodek.zacetek,
+      konec: this.novDogodek.konec,
+      opis: this.novDogodek.opis,
+      cena: this.novDogodek.cena,
+      id_uporabnik: this.uporabnik.id,
+      id_prostor: this.novDogodek.id_prostor
+    }
+
+    this.najemProstorovService.dodajDogodek(data).subscribe(
+      (dogodek) => {
+        console.log("Dogodek uspešno dodan: ", dogodek);
+        alert("Dogodek uspešno dodan!");
+        this.novDogodek.naziv = '';
+        this.novDogodek.zacetek = '';
+        this.novDogodek.konec = '';
+        this.novDogodek.opis = '';
+        this.showDodajDogodek = false;
+      },
+      (napaka) => {
+        console.error("Prišlo je do napake pri dodajanju dogodka: ", napaka);
+        alert("Prišlo je do napake pri dodajanju dogodka!");
+      }
+    );
+
+  }
+
+  prekliciDodajanjeDogodka() {
+    //Izbrisi inpute
+    this.novDogodek.naziv = '';
+    this.novDogodek.zacetek = '';
+    this.novDogodek.konec = '';
+    this.novDogodek.opis = '';
+    this.showDodajDogodek = false;
+    console.log("Dodajanje dogodka preklicano");
   }
 }

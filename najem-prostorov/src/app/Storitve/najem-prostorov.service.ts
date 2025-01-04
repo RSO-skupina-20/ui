@@ -145,4 +145,11 @@ export class NajemProstorovService {
     }, {headers});
 
   }
+
+  public dodajDogodek(data: any) {
+    const url: string = `http://localhost:8082/v1/dogodki`;
+    let headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
+    return this.http.post(url, data, {headers});
+  }
 }
