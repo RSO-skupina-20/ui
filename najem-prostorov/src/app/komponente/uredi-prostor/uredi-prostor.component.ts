@@ -52,28 +52,28 @@ export class UrediProstorComponent implements OnInit {
 
   // Izpolni polja z podatki prostora
   public izpolniPolja() {
-    (document.getElementById('ime') as HTMLInputElement).value = this.prostor.ime;
-    (document.getElementById('opis') as HTMLInputElement).value = this.prostor.opis;
-    (document.getElementById('lokacija') as HTMLInputElement).value = this.prostor.lokacija;
-    (document.getElementById('cena') as HTMLInputElement).value = this.prostor.cena;
-    (document.getElementById('velikost') as HTMLInputElement).value = this.prostor.velikost;
+    (document.getElementById('ime') as HTMLInputElement).value = this.prostor.prostor.ime;
+    (document.getElementById('opis') as HTMLInputElement).value = this.prostor.prostor.opis;
+    (document.getElementById('lokacija') as HTMLInputElement).value = this.prostor.prostor.lokacija;
+    (document.getElementById('cena') as HTMLInputElement).value = this.prostor.prostor.cena;
+    (document.getElementById('velikost') as HTMLInputElement).value = this.prostor.prostor.velikost;
   }
 
   // Posodobi prostor
   public posodobiProstor() {
-    this.prostor.ime = (document.getElementById('ime') as HTMLInputElement).value;
-    this.prostor.opis = (document.getElementById('opis') as HTMLInputElement).value;
-    this.prostor.lokacija = (document.getElementById('lokacija') as HTMLInputElement).value;
-    this.prostor.cena = (document.getElementById('cena') as HTMLInputElement).value;
-    this.prostor.velikost = (document.getElementById('velikost') as HTMLInputElement).value;
+    this.prostor.prostor.ime = (document.getElementById('ime') as HTMLInputElement).value;
+    this.prostor.prostor.opis = (document.getElementById('opis') as HTMLInputElement).value;
+    this.prostor.prostor.lokacija = (document.getElementById('lokacija') as HTMLInputElement).value;
+    this.prostor.prostor.cena = (document.getElementById('cena') as HTMLInputElement).value;
+    this.prostor.prostor.velikost = (document.getElementById('velikost') as HTMLInputElement).value;
 
     // Preveri, če so vsa polja izpolnjena
     if (
-      !this.prostor.ime ||
-      !this.prostor.opis ||
-      !this.prostor.lokacija ||
-      !this.prostor.cena ||
-      !this.prostor.velikost
+      !this.prostor.prostor.ime ||
+      !this.prostor.prostor.opis ||
+      !this.prostor.prostor.lokacija ||
+      !this.prostor.prostor.cena ||
+      !this.prostor.prostor.velikost
     ) {
       alert('Polje ne sme biti prazno!');
       return;
@@ -81,16 +81,16 @@ export class UrediProstorComponent implements OnInit {
 
     // Preveri, če sta cena in velikost številki in večji od 0
     if (
-      isNaN(Number(this.prostor.cena)) ||
-      isNaN(Number(this.prostor.velikost)) ||
-      Number(this.prostor.cena) <= 0 ||
-      Number(this.prostor.velikost) <= 0
+      isNaN(Number(this.prostor.prostor.cena)) ||
+      isNaN(Number(this.prostor.prostor.velikost)) ||
+      Number(this.prostor.prostor.cena) <= 0 ||
+      Number(this.prostor.prostor.velikost) <= 0
     ) {
       alert('Cena in velikost morata biti števili večji od 0!');
       return;
     }
 
-    this.najemProstorovService.posodobiProstor(this.prostor).subscribe(
+    this.najemProstorovService.posodobiProstor(this.prostor.prostor).subscribe(
       (prostor) => {
         console.log('Prostor uspešno posodobljen: ', prostor);
         alert('Prostor uspešno posodobljen!');
@@ -122,6 +122,6 @@ export class UrediProstorComponent implements OnInit {
     const start = new Date(dogodek.zacetek.replace("[UTC]", ""));
     const end = new Date(dogodek.konec.replace("[UTC]", ""));
     const hours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
-    return hours * parseFloat(this.prostor.cena);
+    return hours * parseFloat(this.prostor.prostor.cena);
   }
 }
