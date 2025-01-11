@@ -107,14 +107,12 @@ export class PregledDogodkovComponent implements OnInit {
     this.najemProstorovService.pridobiProstor(this.izbranDogodek.id_prostor).subscribe(
       (prostor) => {
         this.prostor = prostor;
-        this.prostor.celotniNaziv = this.prostor.ime + " - " + this.prostor.lokacija;
+        this.prostor.celotniNaziv = this.prostor.prostor.ime + " - " + this.prostor.prostor.lokacija;
         this.naziv = this.izbranDogodek.naziv;
         this.zacetek = this.izbranDogodek.zacetek;
         this.konec = this.izbranDogodek.konec;
         this.opis = this.izbranDogodek.opis;
         this.cena = this.izbranDogodek.cena;
-        console.log("Izbran dogodek: ", this.izbranDogodek);
-        console.log("Prostor: ", this.prostor);
       },
       (error) => {
         console.error("Napaka pri pridobivanju prostora: ", error);
@@ -126,7 +124,6 @@ export class PregledDogodkovComponent implements OnInit {
   public async omogociUrejanje() {
     await this.pridobiVseProstore();
     this.isEditing = true;
-    console.log(this.prostori);
 
   }
 
@@ -191,9 +188,6 @@ export class PregledDogodkovComponent implements OnInit {
       return;
     }
 
-    console.log("Dodajam gosta: ", ime, priimek, email);
-    console.log("Dogodek: ", this.izbranDogodek.id_dogodek);
-
     // Dodaj gosta
     this.najemProstorovService.dodajGosta(this.izbranDogodek.id_dogodek, ime, priimek, email).subscribe(
       (gost) => {
@@ -232,8 +226,9 @@ export class PregledDogodkovComponent implements OnInit {
 
   }
 
-  shraniDogodek() {
+  async shraniDogodek() {
     // Preveri ce so vsa polja izpolnjena
+    await this.izracunajCenoDogodka();
     if (this.novDogodek.naziv === "" || this.novDogodek.zacetek === ""
       || this.novDogodek.konec === "" || this.novDogodek.opis === "" || this.novDogodek.cena === ""
       || this.novDogodek.id_prostor === "") {
@@ -282,7 +277,28 @@ export class PregledDogodkovComponent implements OnInit {
     this.novDogodek.zacetek = '';
     this.novDogodek.konec = '';
     this.novDogodek.opis = '';
+    this.novDogodek.cena = '';
     this.showDodajDogodek = false;
-    console.log("Dodajanje dogodka preklicano");
+  }
+
+  // Izracunaj ceno dogodka
+  public async izracunajCenoDogodka(): Promise<void> {
+    if (this.novDogodek.zacetek && this.novDogodek.konec && this.novDogodek.id_prostor) {
+      // Pridobi podrobnosti prostora
+      this.najemProstorovService.pridobiProstor(+this.novDogodek.id_prostor).subscribe(
+        (prostor) => {
+          const start = new Date(this.novDogodek.zacetek);
+          const end = new Date(this.novDogodek.konec);
+          const hours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
+          this.novDogodek.cena = (hours * parseFloat(prostor.prostor.cena)).toString();
+          console.log("Cena dogodka: ", this.novDogodek.cena);
+        },
+        (error) => {
+          console.error("Napaka pri pridobivanju prostora: ", error);
+          alert("Napaka pri pridobivanju prostora");
+        }
+      );
+    }
+
   }
 }

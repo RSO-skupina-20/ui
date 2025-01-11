@@ -30,6 +30,7 @@
                 class="form-control"
                 placeholder="Začetek"
                 [(ngModel)]="novDogodek.zacetek"
+                (ngModelChange)="izracunajCenoDogodka()"
                 name="zacetekDogodek"
               />
               <label for="zacetekDogodek">Začetek</label>
@@ -41,6 +42,7 @@
                 class="form-control"
                 placeholder="Konec"
                 [(ngModel)]="novDogodek.konec"
+                (ngModelChange)="izracunajCenoDogodka()"
                 name="konecDogodek"
               />
               <label for="konecDogodek">Konec</label>
@@ -63,6 +65,7 @@
                 class="form-control"
                 placeholder="Cena"
                 [(ngModel)]="novDogodek.cena"
+                [readOnly]="true"
                 name="cenaDogodek"
               />
               <label for="cenaDogodek">Cena (€)</label>
@@ -72,6 +75,7 @@
                 id="prostorDogodek"
                 class="form-control"
                 [(ngModel)]="novDogodek.id_prostor"
+                (ngModelChange)="izracunajCenoDogodka()"
                 name="prostorDogodek"
               >
                 <option *ngFor="let prostor of prostori" [value]="prostor.id">
