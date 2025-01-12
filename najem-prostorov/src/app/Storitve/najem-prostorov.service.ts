@@ -4,6 +4,7 @@ import {BROWSER_STORAGE} from '../Razredi/shramba';
 import {Uporabnik} from '../Razredi/Uporabnik';
 import {Observable} from 'rxjs';
 import {Prostor} from '../Razredi/Prostor';
+import { environment } from '../../environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class NajemProstorovService {
   constructor(private http: HttpClient, @Inject(BROWSER_STORAGE) private shramba: Storage) {
   }
 
-  private uporabnikiUrl = 'http://localhost:8081/v1/uporabniki';
+  //private uporabnikiUrl = 'http://localhost:8081/v1/uporabniki';
+
+  private uporabnikiUrl = environment.uporabnikUrl;
+  private prostoriUrl = environment.prostoriUrl;
+  private dogodkiUrl = environment.dogodkiUrl;
 
   public registrirajUporabnika(uporabnik: Uporabnik): Observable<any> {
     const url: string = `${this.uporabnikiUrl}/registracija`;
@@ -44,7 +49,8 @@ export class NajemProstorovService {
   }
 
   public pridobiProstore(): Observable<any> {
-    const url: string = 'http://localhost:8080/v1/prostori';
+    //const url: string = 'http://localhost:8080/v1/prostori';
+    const url: string = this.prostoriUrl;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
@@ -52,7 +58,8 @@ export class NajemProstorovService {
   }
 
   public pridobiProstoreLastnika(idLastnika: number): Observable<any> {
-    const url: string = `http://localhost:8080/v1/prostori/lastnik/${idLastnika}`;
+    //const url: string = `http://localhost:8080/v1/prostori/lastnik/${idLastnika}`;
+    const url: string = `${this.prostoriUrl}/lastnik/${idLastnika}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
@@ -60,7 +67,8 @@ export class NajemProstorovService {
   }
 
   public dodajProstor(prostor: Prostor) {
-    const url: string = 'http://localhost:8080/v1/prostori';
+    //const url: string = 'http://localhost:8080/v1/prostori';
+    const url: string = this.prostoriUrl;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
@@ -75,7 +83,8 @@ export class NajemProstorovService {
   }
 
   public pridobiProstor(id: number): Observable<any> {
-    const url: string = `http://localhost:8080/v1/prostori/${id}`;
+    //const url: string = `http://localhost:8080/v1/prostori/${id}`;
+    const url: string = `${this.prostoriUrl}/${id}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
@@ -83,7 +92,8 @@ export class NajemProstorovService {
   }
 
   public posodobiProstor(prostor: any): Observable<any> {
-    const url: string = `http://localhost:8080/v1/prostori/${prostor.id}`;
+    //const url: string = `http://localhost:8080/v1/prostori/${prostor.id}`;
+    const url: string = `${this.prostoriUrl}/${prostor.id}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http
@@ -98,14 +108,16 @@ export class NajemProstorovService {
   }
 
   public pridobiDogodkeProstora(prostorId: any) {
-    const url: string = `http://localhost:8082/v1/dogodki/prostor/${prostorId}`;
+    //const url: string = `http://localhost:8082/v1/dogodki/prostor/${prostorId}`;
+    const url: string = `${this.dogodkiUrl}/prostor/${prostorId}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.get(url, {headers});
   }
 
   public pridobiDogodke(id: any) {
-    const url: string = `http://localhost:8082/v1/dogodki/uporabnik/${id}`;
+    //const url: string = `http://localhost:8082/v1/dogodki/uporabnik/${id}`;
+    const url: string = `${this.dogodkiUrl}/uporabnik/${id}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.get(url, {headers});
@@ -113,14 +125,16 @@ export class NajemProstorovService {
   }
 
   public pridobiVseDogodke() {
-    const url: string = `http://localhost:8082/v1/dogodki`;
+    //const url: string = `http://localhost:8082/v1/dogodki`;
+    const url: string = `${this.dogodkiUrl}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.get(url, {headers});
   }
 
   public posodobiDogodek(id: string, naziv: string, zacetek: string, konec: string, opis: string, cena: string) {
-    const url: string = `http://localhost:8082/v1/dogodki/${id}`;
+    //const url: string = `http://localhost:8082/v1/dogodki/${id}`;
+    const url: string = `${this.dogodkiUrl}/${id}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.put(url, {
@@ -133,7 +147,8 @@ export class NajemProstorovService {
   }
 
   public dodajGosta(id_dogodek: number, ime: string, priimek: string, email: string) {
-    const url: string = `http://localhost:8082/v1/povabljeni`;
+    //const url: string = `http://localhost:8082/v1/povabljeni`;
+    const url: string = `${this.dogodkiUrl}/povabljeni`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.post(url, {
@@ -147,7 +162,8 @@ export class NajemProstorovService {
   }
 
   public dodajDogodek(data: any) {
-    const url: string = `http://localhost:8082/v1/dogodki`;
+    //const url: string = `http://localhost:8082/v1/dogodki`;
+    const url: string = `${this.dogodkiUrl}`;
     let headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.shramba.getItem('token')}`)
     return this.http.post(url, data, {headers});
